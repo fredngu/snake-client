@@ -5,6 +5,27 @@ const connect = function () {
     host: 'localhost',
     port: 50541,
   });
+  conn.on("connect", () => {
+    console.log("Successfully connected to game server");
+  })
+  conn.on("connect", () => {
+    conn.write("Name: FDN");
+  });
+  // conn.on("connect", () => {
+  //   setTimeout(() => {
+  //     conn.write("Move: down");
+  //   }, 500);
+  //   setTimeout(() => {
+  //     conn.write("Move: left");
+  //   }, 1000);
+  //   setTimeout(() => {
+  //     conn.write("Move: left");
+  //   }, 1500);
+  //   setInterval(() => {
+  //     conn.write("Move: up");
+  //   }, 5000);
+  // });
+
   conn.on("data", (data) => {
     console.log(data);
   });

@@ -12,21 +12,26 @@ const setupInput = function(conn) {
   return stdin;
 };
 
+let movement;
 const handleUserInput = function(key) {
   if (key === EXIT_GAME) {
     process.exit();
   }
-  if (key === MOVEMENT.MOVE_UP_KEY) {
-    connection.write("Move: up");
+  if (key === MOVEMENT.MOVE_UP_KEY && key !== MOVEMENT.MOVE_DOWN_KEY) {
+    clearInterval(movement);
+    movement = setInterval(() => connection.write("Move: up"), 150);
   }
   if (key === MOVEMENT.MOVE_LEFT_KEY) {
-    connection.write("Move: left");
+    clearInterval(movement);
+    movement = setInterval(() => connection.write("Move: left"), 150);
   }
   if (key === MOVEMENT.MOVE_DOWN_KEY) {
-    connection.write("Move: down");
+    clearInterval(movement);
+    movement = setInterval(() => connection.write("Move: down"), 150);
   }
   if (key === MOVEMENT.MOVE_RIGHT_KEY) {
-    connection.write("Move: right");
+    clearInterval(movement);
+    movement = setInterval(() => connection.write("Move: right"), 150);
   }
   if (TAUNT[key]) {
     connection.write(TAUNT[key]);

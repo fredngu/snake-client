@@ -2,6 +2,7 @@ const { EXIT_GAME, MOVEMENT, TAUNT } = require("./constants");
 // Stores the active TCP connection object.
 let connection;
 
+// sends the messages from the inputs to the server
 const setupInput = function(conn) {
   connection = conn;
   const stdin = process.stdin;
@@ -12,6 +13,7 @@ const setupInput = function(conn) {
   return stdin;
 };
 
+// movement and message inputs from the users/players
 let movement;
 const handleUserInput = function(key) {
   if (key === EXIT_GAME) {

@@ -8,6 +8,7 @@ const connect = function() {
     port: PORT,
   });
 
+  // message on successful startup
   conn.on("connect", () => {
     console.log("Successfully connected to game server");
     conn.write(`Name: ${NAME}`);
@@ -15,6 +16,7 @@ const connect = function() {
 
   conn.setEncoding("utf8");
 
+  // interprets the data returned from the game server
   conn.on("data", (data) => {
     console.log("Game Server: " + data + "\nPress CTRL + C to exit.");
   });

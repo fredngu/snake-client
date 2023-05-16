@@ -1,7 +1,8 @@
+const { EXIT_GAME, MOVEMENT, TAUNT } = require("./constants");
 // Stores the active TCP connection object.
 let connection;
 
-const setupInput = function (conn) {
+const setupInput = function(conn) {
   connection = conn;
   const stdin = process.stdin;
   stdin.setRawMode(true);
@@ -9,32 +10,26 @@ const setupInput = function (conn) {
   stdin.resume();
   stdin.on("data", handleUserInput);
   return stdin;
-}
+};
 
-const handleUserInput = function (key) {
-  if (key === '\u0003') {
+const handleUserInput = function(key) {
+  if (key === EXIT_GAME) {
     process.exit();
   }
-  if (key === 'w') {
+  if (key === MOVEMENT.MOVE_UP_KEY) {
     connection.write("Move: up");
-  }  
-  if (key === 'a') {
+  }
+  if (key === MOVEMENT.MOVE_LEFT_KEY) {
     connection.write("Move: left");
   }
-  if (key === 's') {
+  if (key === MOVEMENT.MOVE_DOWN_KEY) {
     connection.write("Move: down");
   }
-  if (key === 'd') {
+  if (key === MOVEMENT.MOVE_RIGHT_KEY) {
     connection.write("Move: right");
   }
-  if (key === 'z') {
-    connection.write("Say: SSSsssee you later!")
-  }
-  if (key === 'x') {
-    connection.write("Say: Go learn python instead!")
-  }
-  if (key === 'c') {
-    connection.write("Say: You're hissstory")
+  if (TAUNT[key]) {
+    connection.write(TAUNT[key]);
   }
 };
 
